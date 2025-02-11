@@ -21,5 +21,11 @@ object DashboardPageHW {
         withId(R.id.design_menu_item_text),
         withText("Custom Clicks")
     ))
+    val UIElementsOption = onView(allOf(
+        withId(R.id.design_menu_item_text),
+        withText("UiElements")
+    ))
+
+
 
 }

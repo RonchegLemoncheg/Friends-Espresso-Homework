@@ -33,4 +33,10 @@ class DashboardStepsHW {
             customClicksOption.perform(click())
         }
     }
+
+    fun selectUIElementsOption() {
+        with(DashboardPageHW) {
+            UIElementsOption.perform(click())
+        }
+    }
 }
