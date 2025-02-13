@@ -1,7 +1,9 @@
 package com.atiurin.sampleapp.tests.espresso
 
+import android.content.Intent
 import androidx.test.rule.ActivityTestRule
 import com.atiurin.sampleapp.activity.MainActivity
+import com.atiurin.sampleapp.data.Constants
 import com.atiurin.sampleapp.steps.ChatStepsHW
 import com.atiurin.sampleapp.steps.DashboardStepsHW
 import com.atiurin.sampleapp.tests.BaseTest
@@ -13,45 +15,47 @@ class ILoveMyfrindsTest : BaseTest() {
 
     init {
         ruleSequence.addLast(activityTestRule)
+
+    }
+
+
+    @Test
+    fun messageEmetTest() {
+        with(DashboardStepsHW()) {
+            verifyDashboardLoaded()
+            selectChat(Constants.CHAT_EMMET_BROWN)
+        }
+        with(ChatStepsHW()) {
+            verifyChatOpened(Constants.CHAT_EMMET_BROWN)
+            sendMessageToFriend(Constants.MESSAGE_DRINK)
+            verifyMessageSent(Constants.MESSAGE_DRINK)
+        }
     }
 
     @Test
-    fun test() {
+    fun messageFriendAndClearTest() {
         with(DashboardStepsHW()) {
             verifyDashboardLoaded()
-            selectChat("Emmet Brown")
+            selectChat(Constants.CHAT_FRIEND_17)
         }
         with(ChatStepsHW()) {
-            verifyChatOpened("Emmet Brown")
-            sendMessageToFriend("let's go for a drink")
-            verifyMessageSent("let's go for a drink")
-        }
-    }
-
-    @Test
-    fun test2() {
-        with(DashboardStepsHW()) {
-            verifyDashboardLoaded()
-            selectChat("Friend17")
-        }
-        with(ChatStepsHW()) {
-            verifyChatOpened("Friend17")
+            verifyChatOpened(Constants.CHAT_FRIEND_17)
             clearHistory()
-            sendMessageToFriend("please change your name")
-            verifyMessageSent("please change your name")
+            sendMessageToFriend(Constants.MESSAGE_NAME_CHANGE)
+            verifyMessageSent(Constants.MESSAGE_NAME_CHANGE)
         }
     }
 
     @Test
-    fun test3() {
+    fun friendNotFoundTest() {
         with(DashboardStepsHW()) {
             verifyDashboardLoaded()
-            selectChat("Friend25")
+            selectChat(Constants.CHAT_FRIEND_25)
         }
         with(ChatStepsHW()) {
-            verifyChatOpened("Friend25")
-            sendMessageToFriend("you are my hero")
-            verifyMessageSent("you are my hero")
+            verifyChatOpened(Constants.CHAT_FRIEND_25)
+            sendMessageToFriend(Constants.MESSAGE_HERO)
+            verifyMessageSent(Constants.MESSAGE_HERO)
         }
     }
 }

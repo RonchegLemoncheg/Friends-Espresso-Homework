@@ -28,17 +28,15 @@ class DashboardStepsHW {
 
     fun selectChat(name: String) {
         with(DashboardPageHW) {
-            for (attempt in 1..5) {
+            for (attempt in 1..8) {
                 try {
                     chatItem(name).check(matches(isDisplayed())).perform(click())
                     return
                 } catch (e: Exception) {
-                    if (attempt == 5) {
-                        throw RuntimeException("Chat with name '$name' not found after 5 scroll attempts.")
+                    if (attempt == 8) {
+                        throw RuntimeException("Chat with name '$name' not found after 8 scroll attempts.")
                     }
-
-                    swiper(400, 200, 2)
-
+                    swiper(320, 210, 2)
                 }
             }
         }
